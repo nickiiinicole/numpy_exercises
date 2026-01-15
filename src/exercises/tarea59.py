@@ -20,5 +20,5 @@ print(f"{np.concatenate((b,a), axis=0)} \n")
 
 print(f"{np.concatenate((a,b), axis=1)}")
 
-#/TODO print(np.vstack((a, b))) probar esa funcion
+#/TODO print(np.vstack((a, b))) probar esa funcionesq hacen lo = 
 #/TODO print(np.hstack((a, b)))
