@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 a = np.array([1,2,3,2,3,4,3,4,5,6])
 b = np.array([7,2,10,2,7,4,9,4,9,8])
@@ -49,3 +50,22 @@ result_parseado = result.astype(int)
 print("Array A:", a)
 print("Array B:", b)
 print("Máximos:", result_parseado)
+
+columnas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
+
+try: 
+
+    df_iris= pd.read_csv("./resource/iris.data", names=columnas)
+    sepal_length = df_iris['sepal_length'].to_numpy()
+    print(df_iris['sepal_length'])
+
+    minimo = sepal_length.min()  
+    maximo = sepal_length.max()  
+    rango = maximo - minimo
+
+    
+    sepal_normalizado = (sepal_length - minimo) / rango
+    print(sepal_normalizado[:5])
+
+except Exception as e:
+    print(f"Error: {e}")
