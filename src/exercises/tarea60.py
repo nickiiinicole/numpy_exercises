@@ -19,7 +19,33 @@ def maxx(x, y):
         return y
 # Fai que se aplique de xeito vectorial de tal xeito 
 # que se o aplicamos aos array a e b obteñamos o seguinte resultado.
-# a = np.array([5, 7, 9, 8, 6, 4, 5])
-# b = np.array([6, 3, 4, 8, 9, 7, 1])
+a = np.array([5, 7, 9, 8, 6, 4, 5])
+b = np.array([6, 3, 4, 8, 9, 7, 1])
 # pair_max(a, b)
-# #> array([ 6.,  7.,  9.,  8.,  9.,  7.,  5.])
+# # #> array([ 6.,  7.,  9.,  8.,  9.,  7.,  5.])
+
+# La vectorización es, básicamente, 
+# eliminar los bucles for de Python 
+# y empujar ese trabajo a una capa inferior 
+# mucho más rápida (escrita en C).
+
+# Usar np.vectorize , es como un adaptador que coge los arrays en este caso 
+# a y b y los recorre elemento a elemento y te va pasando los numeros 
+# entonces haces ahi la condicion
+# Esto crea una nueva función 'pair_max' que internamente hace el bucle por ti
+pair_max = np.vectorize(maxx)
+
+resultado = pair_max(a, b)
+
+print("Array A:", a)
+print("Array B:", b)
+print("Máximos:", resultado)
+
+# otra manera de hacerlo es :
+pair_max = np.frompyfunc(maxx, 2, 1)
+result = pair_max(a, b)
+result_parseado = result.astype(int)
+
+print("Array A:", a)
+print("Array B:", b)
+print("Máximos:", result_parseado)
