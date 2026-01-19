@@ -10,21 +10,18 @@ try:
     df_iris['class_num'] = df_iris['class'].astype('category').cat.codes
 
     valores_unicos = df_iris['class'].unique()
-    print(f"\nClases únicas: {valores_unicos}")
+    print(f"\nLas clases unicas : {valores_unicos}")
 
-    # 4. Asignar valor numérico automático
-    # O xeito máis potente en Pandas é usar o tipo 'category'.
+    #   Asignar valor numérico, para ello se usa category en pandas 
     # .cat.codes asigna automaticamente 0, 1, 2... a cada categoría única atopada.
     df_iris['class_num'] = df_iris['class'].astype('category').cat.codes
 
-    print("\n--- Resultado con nova columna numérica ---")
-    # Mostramos unha mostra aleatoria para ver as diferentes clases
     print(df_iris[['class', 'class_num']].sample(10))
-
-    # OPCIONAL: Se queres ver que número se asignou a que texto:
-    # Creamos un dicionario para comprobar
-    mapeo = dict(enumerate(df_iris['class'].astype('category').cat.categories))
-    print(f"\nMapeo automático realizado: {mapeo}")
-
+    
+    class_uniques= df_iris['class'].unique() # creo primero las columnas
+    dummies = pd.get_dummies(df_iris['class'], dtype=int)
+    final_df= pd.concat([df_iris, dummies], axis=1)
+    print(final_df.sample(10))
+    
 except Exception as e:
-    print(f"Erro: {e}")
+    print(f"Error: {e}")
